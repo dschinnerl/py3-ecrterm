@@ -431,7 +431,7 @@ class ECR(object):
 
 
 if __name__ == '__main__':
-    _logfile = open('./terminallog.txt', 'aw')
+    _logfile = open('./terminallog.txt', 'a')
     _logfile.write('-MARK-\n')
     e = ECR()
     # e.end_of_day()
