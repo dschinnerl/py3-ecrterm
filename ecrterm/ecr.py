@@ -423,7 +423,7 @@ class ECR(object):
     def detect_pt(self):
         # note: this only executes utils.detect_pt with the local ecrterm.
         if type(self.transport) is SerialTransport:
-            return detect_pt_serial(timeout=2, silent=False, ecr=self)
+            return detect_pt_serial(device=self.transport.device, timeout=2, silent=False, ecr=self)
         return True
 
     def parse_str(self, s):
