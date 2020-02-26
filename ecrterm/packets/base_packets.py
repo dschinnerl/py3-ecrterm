@@ -551,7 +551,7 @@ class PacketReceivedError(Packet):
 Packets.register(PacketReceivedError)
 
 
-# Authorisation PAckets needed:
+# Authorisation Packets needed:
 class Authorisation(Packet):
     """
     06 01
