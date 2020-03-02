@@ -118,7 +118,7 @@ def ecr_log(data, incoming=False):
             print(e)
             _logfile.write('? did not understand ?\n')
             data = toHexString(data)
-        print('%s %s' % (incoming, data))
+        _logfile.write('%s %s\n' % (incoming, data))
     except Exception:
         import traceback
         traceback.print_exc()
