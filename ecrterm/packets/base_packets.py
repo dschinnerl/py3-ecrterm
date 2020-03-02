@@ -710,6 +710,40 @@ class StatusEnquiry(Packet):
 
 Packets.register(StatusEnquiry)
 
+
+class RepeatReceipt(Packet):
+    """
+    06 20
+    """
+
+    cmd_class = 0x6
+    cmd_instr = 0x20
+    fixed_arguments = ('password',)
+    fixed_values = {'password': '123456'}
+    allowed_bitmaps = ['service_byte']
+    wait_for_completion = True
+
+    def consume_fixed(self, data, length):
+        if length:
+            self.fixed_values['password'] = ''.join(
+                [toHexString([c]) for c in data[0:3]])
+        return data[3:]
+
+Packets.register(RepeatReceipt)
+
+
+class LogOff(Packet):
+    """
+    06 02
+    """
+
+    cmd_class = 0x6
+    cmd_instr = 0x20
+    wait_for_completion = False
+
+Packets.register(LogOff)
+
+
 if __name__ == '__main__':
     # test the register
     from pprint import pprint

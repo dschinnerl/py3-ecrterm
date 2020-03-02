@@ -16,7 +16,8 @@ from ecrterm.exceptions import (
 from ecrterm.packets.apdu import Packets
 from ecrterm.packets.base_packets import (
     Authorisation, Completion, DisplayText, EndOfDay, Packet, PrintLine,
-    Registration, ResetTerminal, StatusEnquiry, StatusInformation)
+    Registration, ResetTerminal, StatusEnquiry, StatusInformation, RepeatReceipt,
+    LogOff)
 from ecrterm.packets.bmp import BCD
 from ecrterm.transmission._transmission import Transmission
 from ecrterm.transmission.signals import ACK, DLE, ETX, NAK, STX, TRANSMIT_OK
@@ -300,6 +301,16 @@ class ECR(object):
         """Restarts/resets the PT."""
         self._state_registered = False
         return self.transmit(ResetTerminal())
+
+    def repeat_receipt(self):
+        """
+        """
+        return self.transmit(RepeatReceipt())
+
+    def log_off(self):
+        """
+        """
+        return self.transmit(LogOff())
 
     def reset(self):
         """
