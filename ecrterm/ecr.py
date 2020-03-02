@@ -17,7 +17,7 @@ from ecrterm.packets.apdu import Packets
 from ecrterm.packets.base_packets import (
     Authorisation, Completion, DisplayText, EndOfDay, Packet, PrintLine,
     Registration, ResetTerminal, StatusEnquiry, StatusInformation, RepeatReceipt,
-    LogOff)
+    LogOff, AbortCommand)
 from ecrterm.packets.bmp import BCD
 from ecrterm.transmission._transmission import Transmission
 from ecrterm.transmission.signals import ACK, DLE, ETX, NAK, STX, TRANSMIT_OK
@@ -311,6 +311,11 @@ class ECR(object):
         """
         """
         return self.transmit(LogOff())
+
+    def abort(self):
+        """
+        """
+        return self.transmit(AbortCommand())
 
     def reset(self):
         """
