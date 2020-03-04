@@ -317,10 +317,15 @@ class ECR(object):
         """
         return self.transmit(Abort())
 
-    def read_card(self):
+    def read_card(self, listener):
         """
         """
-        return self.transmit(ReadCard())
+        packet = ReadCard()
+
+        if listener:
+            packet.register_response_listener(listener)
+
+        return self.transmit(packet)
 
     def reset(self):
         """
