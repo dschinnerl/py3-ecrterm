@@ -295,7 +295,7 @@ class DisplayTextIntInput(Packet):
 Packets.register(DisplayTextIntInput)
 
 
-class AbortCommand(Packet):
+class Abort(Packet):
     """
     06 B0
     * Sent by ECR to abort a running transaction in the PT
@@ -305,7 +305,7 @@ class AbortCommand(Packet):
     cmd_instr = 0xb0
 
 
-Packets.register(AbortCommand)
+Packets.register(Abort)
 
 
 class Completion(Packet):
@@ -742,6 +742,18 @@ class LogOff(Packet):
     wait_for_completion = False
 
 Packets.register(LogOff)
+
+
+class ReadCard(Packet):
+    """
+    06 C0
+    """
+
+    cmd_class = 0x6
+    cmd_instr = 0xc0
+    wait_for_completion = False
+
+Packets.register(ReadCard)
 
 
 if __name__ == '__main__':
