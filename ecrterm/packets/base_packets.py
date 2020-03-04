@@ -744,18 +744,6 @@ class LogOff(Packet):
 Packets.register(LogOff)
 
 
-class ReadCard(Packet):
-    """
-    06 C0
-    """
-
-    cmd_class = 0x6
-    cmd_instr = 0xc0
-    wait_for_completion = False
-
-Packets.register(ReadCard)
-
-
 if __name__ == '__main__':
     # test the register
     from pprint import pprint
