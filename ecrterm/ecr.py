@@ -8,6 +8,7 @@ Maybe create a small console program which allows us to:
 """
 from logging import error
 from time import sleep
+import datetime
 
 from ecrterm.common import TERMINAL_STATUS_CODES
 from ecrterm.conv import bs2hl, toBytes, toHexString
@@ -99,6 +100,7 @@ def parse_represented_data(data):
 
 def ecr_log(data, incoming=False):
     try:
+        ts = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         if incoming:
             incoming = '<'
         else:
@@ -107,18 +109,18 @@ def ecr_log(data, incoming=False):
             data = bs2hl(data)
         # logit to the logfile
         try:
-            _logfile.write('%s %s\n' % (incoming, toHexString(data)))
+            _logfile.write('%s %s %s\n' % (ts, incoming, toHexString(data)))
         except Exception:
             pass
         try:
             data = repr(parse_represented_data(data))
-            _logfile.write('= %s\n' % data)
+            _logfile.write('%s = %s\n' % (ts, data))
         except Exception as e:
             print('DEBUG: Cannot be represented: %s' % data)
             print(e)
             _logfile.write('? did not understand ?\n')
             data = toHexString(data)
-        _logfile.write('%s %s\n' % (incoming, data))
+        _logfile.write('%s %s %s\n' % (ts, incoming, data))
     except Exception:
         import traceback
         traceback.print_exc()
